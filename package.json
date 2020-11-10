@@ -1,0 +1,96 @@
+{
+	"name": "compress-image",
+	"displayName": "compress-image",
+	"publisher": "hliujie",
+	"description": "",
+	"version": "0.0.1",
+	"engines": {
+		"vscode": "^1.21.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"repository": {
+    "type": "git",
+    "url": "git+https://github.com/stupidWall/vscode-plugin-compre-image.git"
+  },
+	"activationEvents": [
+		"onCommand:extension.compress"
+	],
+	"main": "./extension.js",
+	"contributes": {
+		"commands": [
+			{
+				"command": "extension.compress",
+				"title": "Image Compress",
+				"category": "image"
+			}
+		],
+		"keybindings": [
+			{
+				"command": "extension.compress",
+				"key": "ctrl+f10",
+				"mac": "cmd+f10",
+				"when": "editorFocus"
+			}
+		],
+		"menus": {
+			"editor/title": [
+				{
+					"when": "resourceExtname =~ /\\.(png|jpg|jpeg|svg|gif)$/",
+					"command": "extension.compress",
+					"group": "navigation"
+				}
+			],
+			"explorer/context": [
+				{
+					"when": "resourceExtname =~ /\\.(png|jpg|jpeg|svg|gif)$/",
+					"command": "extension.compress",
+					"group": "image"
+				}
+			],
+			"editor/context": [
+				{
+					"when": "editorFocus",
+					"command": "extension.compress",
+					"group": "navigation"
+				}
+			]
+		},
+		"configuration": {
+			"type": "object",
+			"title": "CompressImage",
+			"properties": {
+				"vscodePluginDemo.tinifyKey": {
+					"type": "string",
+					"default": "Y4y4NfM6qkKbbDpZcgyC0hCjJnVQMPBY",
+					"description": "Tinify的API_KEY"
+				},
+				"vscodePluginDemo.saveDirname": {
+					"type": "string",
+					"default": "/",
+					"description": "压缩后图片存储路径； 示例： /assets/images/"
+				}
+			}
+		}
+	},
+	"scripts": {
+		"lint": "eslint .",
+		"pretest": "yarn run lint",
+		"test": "node ./test/runTest.js"
+	},
+	"devDependencies": {
+		"@types/glob": "^7.1.3",
+		"@types/mocha": "^8.0.0",
+		"@types/node": "^12.11.7",
+		"@types/vscode": "^1.21.0",
+		"eslint": "^7.9.0",
+		"glob": "^7.1.6",
+		"mocha": "^8.1.3",
+		"typescript": "^4.0.2",
+		"vscode-test": "^1.4.0"
+	},
+	"dependencies": {
+		"tinify": "^1.6.0-beta.2"
+	}
+}
